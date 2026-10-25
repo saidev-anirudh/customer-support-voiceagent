@@ -218,3 +218,47 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ---------------------------------------------------------------------------
+# Project-specific
+# ---------------------------------------------------------------------------
+
+# Environment and secrets (examples stay tracked)
+.env
+.env.*
+!.env.example
+secrets.env
+agent/secrets.env
+*.secrets
+service-account*.json
+google-credentials*.json
+credentials/
+
+# Node / Next.js frontend
+node_modules/
+web/.next/
+web/out/
+web/.env.local
+web/.env*.local
+web/next-env.d.ts
+*.tsbuildinfo
+.pnpm-store/
+
+# LiveKit local artifacts and session data
+session_report*.json
+session_reports/
+agent/.livekit/
+agent/downloaded_models/
+
+# Tooling caches
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/
+.venv/
+agent/.venv/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

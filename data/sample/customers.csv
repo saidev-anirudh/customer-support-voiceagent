@@ -1,0 +1,4 @@
+Phone,Name,PIN,Claim ID,Claim Status,Status Detail,Documents Needed,Document Instructions,Preferred Language
+5550101001,Priya Shah,1234,CLM-1001,Approved,Payment of the approved amount is scheduled within 3 business days.,FALSE,,en
+5550101002,Amit Verma,4321,CLM-1002,Pending documents,The claim cannot move forward until the missing documents are received.,TRUE,"Upload a photo of the repair estimate and the signed claim form at northwind.example/claims/upload, or email them to claims@northwind.example with the claim ID CLM-1002 in the subject line. Documents are needed within 7 days.",hi
+5550101003,Rahul Mehta,2468,CLM-1003,Under review,An adjuster is reviewing the claim and will respond within 5 business days.,FALSE,,en

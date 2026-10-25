@@ -1,0 +1,33 @@
+[project]
+name = "customer-support-voiceagent"
+version = "0.1.0"
+description = "Inbound insurance claims support voice agent (English and Hindi) built on LiveKit Agents."
+requires-python = ">=3.10,<3.14"
+dependencies = [
+  "livekit-agents[sarvam,cartesia,openai,silero,turn-detector]~=1.8",
+  "python-dotenv>=1.0",
+  "gspread>=6.1",
+  "pyyaml>=6.0",
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=8",
+  "pytest-asyncio>=0.24",
+  "ruff>=0.6",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["."]
+markers = [
+  "llm: needs a real language model (OPENROUTER_API_KEY); skipped when the key is missing",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

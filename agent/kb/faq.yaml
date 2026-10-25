@@ -1,0 +1,41 @@
+# Public FAQ answers. Safe to share with unverified callers.
+# Each topic has an English (en) and Hindi (hi) answer. Edit freely.
+
+hours:
+  en: >-
+    Our claims team is available Monday to Friday from 9 AM to 6 PM, and Saturday from
+    10 AM to 2 PM, India Standard Time. We are closed on Sundays and public holidays.
+  hi: >-
+    हमारी क्लेम्स टीम सोमवार से शुक्रवार सुबह 9 बजे से शाम 6 बजे तक, और शनिवार सुबह 10 बजे से
+    दोपहर 2 बजे तक उपलब्ध है। रविवार और सार्वजनिक छुट्टियों में हम बंद रहते हैं।
+
+address:
+  en: >-
+    Our mailing address is Northwind Insurance, Claims Department, 100 Market Street,
+    Suite 400, Bengaluru 560001, India.
+  hi: >-
+    हमारा डाक का पता है: Northwind Insurance, Claims Department, 100 Market Street,
+    Suite 400, बेंगलुरु 560001, भारत।
+
+new_claim:
+  en: >-
+    To start a new claim, you can call us during office hours, or submit it online at
+    northwind.example/claims/new. Please keep your policy number, the date and place of the
+    incident, and a short description of what happened ready. Photos or estimates help us
+    move faster.
+  hi: >-
+    नया क्लेम शुरू करने के लिए आप कार्यालय समय में हमें कॉल कर सकते हैं, या northwind.example/claims/new
+    पर ऑनलाइन जमा कर सकते हैं। कृपया अपना पॉलिसी नंबर, घटना की तारीख और जगह, और क्या हुआ उसका
+    संक्षिप्त विवरण तैयार रखें। फोटो या अनुमान पत्र होने से प्रक्रिया तेज़ होती है।
+
+process:
+  en: >-
+    The claims process has four steps. First, you file the claim. Second, we review it and
+    may ask for supporting documents. Third, an adjuster assesses the claim. Fourth, we
+    approve and pay the claim, or explain the decision. Most claims are resolved within
+    10 business days once all documents are received.
+  hi: >-
+    क्लेम प्रक्रिया में चार चरण होते हैं। पहला, आप क्लेम दर्ज करते हैं। दूसरा, हम उसकी समीक्षा करते हैं
+    और ज़रूरत पड़ने पर सहायक दस्तावेज़ मांग सकते हैं। तीसरा, एक एडजस्टर क्लेम का मूल्यांकन करता है।
+    चौथा, हम क्लेम को मंज़ूर करके भुगतान करते हैं, या निर्णय का कारण बताते हैं। सभी दस्तावेज़ मिलने के
+    बाद ज़्यादातर क्लेम 10 कार्य दिवसों में निपट जाते हैं।

@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+tests/
+.env
+.env.*
+secrets.env
+service-account*.json
+credentials/
+session_report*.json
+.git/
+.gitignore
+.DS_Store
