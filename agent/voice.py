@@ -55,7 +55,30 @@ def build_tts() -> cartesia.TTS:
     return cartesia.TTS(**kwargs)
 
 
+def has_llm_credentials() -> bool:
+    return bool(os.getenv("AZURE_OPENAI_MAIN_API_KEY") or os.getenv("OPENROUTER_API_KEY"))
+
+
+def _supports_temperature(model: str) -> bool:
+    """Reasoning deployments (gpt-5.x, o-series) reject a custom temperature."""
+    return not model.lower().startswith(("gpt-5", "o1", "o3", "o4"))
+
+
 def build_llm() -> llm.LLM:
+    """Azure OpenAI when ``AZURE_OPENAI_MAIN_API_KEY`` is set, otherwise OpenRouter.
+
+    The Azure v1 endpoint (``.../openai/v1``) speaks the standard OpenAI protocol, so the
+    plain OpenAI client is used with ``base_url``. ``model`` is the deployment name.
+    """
+    if azure_key := os.getenv("AZURE_OPENAI_MAIN_API_KEY"):
+        model = os.getenv("AZURE_OPENAI_MAIN_BASE_MODEL", "gpt-4.1")
+        extra = {"temperature": 0.3} if _supports_temperature(model) else {}
+        return openai.LLM(
+            model=model,
+            api_key=azure_key,
+            base_url=os.environ["AZURE_OPENAI_MAIN_BASE_URL"],
+            **extra,
+        )
     return openai.LLM.with_openrouter(
         model=os.getenv("LLM_MODEL", "openai/gpt-4o-mini"),
         api_key=os.getenv("OPENROUTER_API_KEY"),
@@ -120,6 +143,10 @@ async def guarded_text_input(session: AgentSession, event: room_io.TextInputEven
         await session.interrupt()
         trigger_emergency(session)
         return
+    # Typed text never produces a speech transcript, so follow the script here: Devanagari
+    # means Hindi, which keeps the voice language in step with the reply language.
+    if _DEVANAGARI.search(event.text):
+        apply_language(session, "hi")
     await _default_text_input_cb(session, event)
 
 

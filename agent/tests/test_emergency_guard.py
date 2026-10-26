@@ -79,3 +79,16 @@ async def test_spoken_turn_guard_raises_stop_response(state):
         llm.ChatContext(), llm.ChatMessage(role="user", content=["what are your hours"])
     )
     assert calm.session.said == []
+
+
+async def test_typed_devanagari_switches_the_call_to_hindi(state, monkeypatch):
+    forwarded = []
+
+    async def default_cb(session, event):
+        forwarded.append(event.text)
+
+    monkeypatch.setattr("voice._default_text_input_cb", default_cb)
+    session = FakeSession(state)
+    session.tts = None
+    await guarded_text_input(session, types.SimpleNamespace(text="मुझे क्लेम स्टेटस चाहिए"))
+    assert state.language == "hi" and forwarded == ["मुझे क्लेम स्टेटस चाहिए"]

@@ -15,9 +15,11 @@ load_dotenv(Path(__file__).resolve().parents[2] / ".env")
 
 
 def pytest_collection_modifyitems(config, items):
-    if os.getenv("OPENROUTER_API_KEY"):
+    if os.getenv("AZURE_OPENAI_MAIN_API_KEY") or os.getenv("OPENROUTER_API_KEY"):
         return
-    skip = pytest.mark.skip(reason="OPENROUTER_API_KEY not set")
+    skip = pytest.mark.skip(
+        reason="no LLM credentials (AZURE_OPENAI_MAIN_API_KEY or OPENROUTER_API_KEY)"
+    )
     for item in items:
         if "llm" in item.keywords:
             item.add_marker(skip)

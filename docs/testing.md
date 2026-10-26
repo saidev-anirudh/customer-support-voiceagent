@@ -26,7 +26,7 @@ Tool bodies are exercised directly (`tests/conftest.py::call_tool`), which keeps
 
 `test_flows.py` drives full calls with LiveKit's `AgentSession.run` test API against the real model, with the in-memory store. It covers the happy path, the documents path, two wrong PINs, an unknown number, a representative request before verification, FAQ without verification, an attempt to skip verification, a language switch, and a final pass with LiveKit's built-in `safety_judge`, `accuracy_judge`, and `task_completion_judge`.
 
-They need `OPENROUTER_API_KEY` (from the environment or the repo `.env`) and are skipped automatically without it. Because a language model is involved, assertions check call state and required facts rather than exact wording. If one fails intermittently, run it again before investigating, and try a stronger `LLM_MODEL`.
+They need LLM credentials, `AZURE_OPENAI_MAIN_API_KEY` or `OPENROUTER_API_KEY` (from the environment or the repo `.env`), and are skipped automatically without it. Because a language model is involved, assertions check call state and required facts rather than exact wording. If one fails intermittently, run it again before investigating, and try a stronger `LLM_MODEL`.
 
 Each flow test takes a few seconds and uses a few model calls.
 

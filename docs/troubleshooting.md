@@ -65,7 +65,7 @@
 ## Tests fail
 
 - `make test` should pass with no keys. If it does not, run `uv sync` in `agent/`.
-- Conversation-flow tests are skipped without `OPENROUTER_API_KEY`. If one fails intermittently, rerun it, since it involves a real model.
+- Conversation-flow tests are skipped without LLM credentials (`AZURE_OPENAI_MAIN_API_KEY` or `OPENROUTER_API_KEY`). If one fails intermittently, rerun it, since it involves a real model.
 
 ## Build fails on LiveKit Cloud
 

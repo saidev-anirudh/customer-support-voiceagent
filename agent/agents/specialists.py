@@ -117,8 +117,8 @@ class EscalationTask(SpeakTask):
         super().__init__(
             state,
             task=(
-                "The caller asked for a human representative. Acknowledge kindly, confirm a "
-                "callback has been arranged, and ask if there is anything else you can help with."
+                "The caller asked for a human representative. Acknowledge kindly and confirm a "
+                "callback has been arranged. Do not ask a follow-up question."
             ),
             facts="\n".join(f"- {line}" for line in lines),
             chat_ctx=chat_ctx,

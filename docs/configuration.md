@@ -15,8 +15,12 @@ All agent settings are environment variables. Locally they come from a `.env` fi
 | `CARTESIA_VOICE_ID` | Recommended | No | A multilingual Sonic voice from the Cartesia library. A default voice is used if empty |
 | `CARTESIA_MODEL` | No | No | Default `sonic-3` |
 | `CARTESIA_SPEED` | No | No | Speaking rate, default `1.0` |
-| `OPENROUTER_API_KEY` | Yes | Yes | Language model access |
-| `LLM_MODEL` | No | No | Any OpenRouter model that supports tool calling. Default `openai/gpt-4o-mini` |
+| `AZURE_OPENAI_MAIN_API_KEY` | One LLM option | Yes | Azure OpenAI key. When set, Azure is used for the language model |
+| `AZURE_OPENAI_MAIN_BASE_URL` | With Azure | No | The v1 endpoint, ending in `/openai/v1` |
+| `AZURE_OPENAI_MAIN_BASE_MODEL` | With Azure | No | Deployment name, for example `gpt-4.1`. Default `gpt-4.1`. Reasoning deployments such as `gpt-5.x` are supported, and a custom temperature is skipped for them |
+| `AZURE_OPENAI_MAIN_API_VERSION` | No | No | Informational. The v1 endpoint needs no `api-version` parameter |
+| `OPENROUTER_API_KEY` | One LLM option | Yes | Fallback language model access, used only when no Azure key is set |
+| `LLM_MODEL` | No | No | OpenRouter model that supports tool calling. Default `openai/gpt-4o-mini` |
 | `GOOGLE_SHEET_ID` | For Sheets | No | The id in the spreadsheet URL |
 | `GOOGLE_SERVICE_ACCOUNT_FILE` | For Sheets | Path only | Path to the service account key. On LiveKit Cloud the file is found at `/etc/secrets/<filename>` automatically |
 | `CUSTOMERS_TAB` | No | No | Default `Customers` |
@@ -46,7 +50,7 @@ Both token sources let any visitor request a token, so use them for development 
 - **LiveKit.** Create a project at [cloud.livekit.io](https://cloud.livekit.io). Copy the URL and an API key from Settings. Run `lk cloud auth` to link the CLI.
 - **Sarvam.** Create an API key in the [Sarvam dashboard](https://dashboard.sarvam.ai). Realtime streaming must be enabled for the account.
 - **Cartesia.** Create a key at [play.cartesia.ai](https://play.cartesia.ai) and pick a voice. Copy its id into `CARTESIA_VOICE_ID`.
-- **OpenRouter.** Create a key at [openrouter.ai/keys](https://openrouter.ai/keys).
+- **Azure OpenAI.** Copy the key and the v1 endpoint from your Azure AI Foundry resource, and use the name of a deployed chat model. **OpenRouter** is the alternative: create a key at [openrouter.ai/keys](https://openrouter.ai/keys).
 - **Google.** See [data-model.md](data-model.md).
 
 ## Swapping providers
@@ -55,7 +59,7 @@ Provider code is isolated in `agent/voice.py`.
 
 - **Speech to text.** Set `STT_PROVIDER=deepgram` to use Deepgram Nova-3 multilingual through LiveKit Inference. It uses LiveKit Inference credits and needs no extra key. For another provider, change `build_stt()`.
 - **Text to speech.** Change `build_tts()`. Keep the language update in `language.apply_language`, which calls `update_options(language=...)`.
-- **Language model.** Change `LLM_MODEL`, or replace `build_llm()` to use another provider or a LiveKit Inference model string.
+- **Language model.** Azure OpenAI is used when `AZURE_OPENAI_MAIN_API_KEY` is set, otherwise OpenRouter. Change the deployment with `AZURE_OPENAI_MAIN_BASE_MODEL` or `LLM_MODEL`, or replace `build_llm()` to use another provider or a LiveKit Inference model string.
 - **Storage.** Implement the `Store` protocol in `agent/integrations/models.py` (`find_customer` and `append_interaction`) and return it from `build_store()`.
 
 ## Tuning

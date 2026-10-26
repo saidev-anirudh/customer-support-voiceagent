@@ -25,7 +25,7 @@ web: ## Run the browser client on http://localhost:3000
 test: ## Run the tests that need no credentials
 	cd $(AGENT_DIR) && uv run pytest -m "not llm"
 
-test-all: ## Run every test, including conversation flows (needs OPENROUTER_API_KEY)
+test-all: ## Run every test, including conversation flows (needs LLM credentials)
 	cd $(AGENT_DIR) && uv run pytest
 
 lint: ## Lint the agent and type-check the web client
